@@ -1,0 +1,40 @@
+name: 测试反馈
+description: 用某位导演跑了一条视频？把基线版和导演版一起发上来
+title: "[反馈] 导演：  · 模型："
+labels: ["feedback"]
+body:
+  - type: input
+    id: director
+    attributes: {label: 导演, placeholder: 例如 姜文}
+    validations: {required: true}
+  - type: input
+    id: model
+    attributes: {label: 模型与参数, placeholder: 例如 Seedance 2.5 · 720p · 10 秒 · 9:16}
+    validations: {required: true}
+  - type: textarea
+    id: scene
+    attributes: {label: 场景（一句话）}
+  - type: textarea
+    id: videos
+    attributes:
+      label: 基线版 / 导演版视频
+      description: 拖进视频文件或贴链接；两条都要，才能对比
+    validations: {required: true}
+  - type: dropdown
+    id: q1
+    attributes: {label: 像这位导演吗？（1–5）, options: ["1", "2", "3", "4", "5"]}
+  - type: dropdown
+    id: q2
+    attributes: {label: 看得出镜头背后有个人吗？（1–5）, options: ["1", "2", "3", "4", "5"]}
+  - type: dropdown
+    id: q3
+    attributes: {label: 关键剧情丢了吗？, options: ["没丢", "丢了"]}
+  - type: textarea
+    id: missing
+    attributes: {label: 提示词里写了、视频里没出现的}
+  - type: textarea
+    id: surprise
+    attributes: {label: 意外：视频里出现了、但没写的, description: 例如演员表演变了、跳切}
+  - type: textarea
+    id: notes
+    attributes: {label: 一句话感受 / 生成了几次}
