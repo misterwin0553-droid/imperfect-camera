@@ -1,10 +1,8 @@
-# 有因的不完美 · 导演风格 skill（公开测试版 v0.3）
+# 不完美，才真实 · 导演运镜 skill
 
-让 AI 视频的镜头**像某位真实导演拍的**，而不是"所有摄影师的平均值"。
+AI 视频一眼假，毛病多半不在画质，在镜头：太标准了，标准到不像有人在拍。
 
-你只要选一位导演，skill 会把他"怎么拍"翻译成一条条具体的拍摄者行为（反应慢半拍、隔着门框偷看、镜头比人还激动……），写成提示词。**导演名字本身不写进提示词**：直接写"王家卫风格"，模型通常只学到色调。
-
-这是「有因的不完美」研究系列的配套工具，目前是测试版，很多写法还在验证，所以需要你帮忙测。
+这个 Claude skill 的思路是用"不完美"指导运镜。真人拍的镜头会慢半拍、会被门框挡住、会忍不住往前凑，这些"毛病"背后都有原因，也正是真实感的来源。你选一位导演，它把这位导演的拍法翻成一条条具体的拍摄动作，写成能直接用的提示词。
 
 ## 内置 10 位导演
 
@@ -14,9 +12,9 @@
 
 ## 安装
 
-**Claude Code**：把 `motivated-imperfection` 文件夹放进项目的 `.claude/skills/`（只对这个项目生效），或 `~/.claude/skills/`（所有项目生效）。
+**Claude Code**：把 `imperfect-camera` 文件夹放进项目的 `.claude/skills/`（只对这个项目生效），或放进 `~/.claude/skills/`（所有项目生效）。
 
-**Claude 网页版 / App**：下载 [motivated-imperfection.zip](https://github.com/misterwin0553-droid/motivated-imperfection/releases/latest/download/motivated-imperfection.zip)，在 设置 → 功能（Capabilities）→ Skills 里上传。
+**Claude 网页版 / App**：下载 [imperfect-camera.zip](https://github.com/misterwin0553-droid/imperfect-camera/releases/latest/download/imperfect-camera.zip)，在 设置 → 功能（Capabilities）→ Skills 里上传。
 
 ## 怎么用
 
@@ -24,28 +22,27 @@
 
 > 用侯孝贤的风格拍：她站在窗前，门外传来钥匙声，她转身。10 秒，竖屏。
 
-它会给你两段提示词：**基线版**（普通 AI 拍法）和**导演版**。两段都拿去生成，对比着看。
+它会给你两段提示词：**普通版**（常规 AI 拍法）和**导演版**。两段都拿去生成，对比着看。
 
 - 用 **PX Show**：它会把内容写进对应字段。
 - 用**其他模型**（Seedance、可灵、即梦、Veo、Sora……）：直接粘贴那段提示词。
 
-## 第一期试点告诉我们的（写法参考）
+## 它遵循的几条写法
 
-- ✅ **"镜头慢半拍追过去"很好做**：模型本来就是人先动、镜头后动，只是让它更慢、更慌。
-- ❌ **"镜头比人先动"很难**：试点两次都没成。现在的写法改成了用时间点钉住顺序，**正需要你帮忙验证**。
-- ⚠️ 写"镜头很紧张"，模型可能把紧张给演员；冲得太猛会变成跳切。skill 里已经加了约束。
+- **写拍的人，不写运镜。** 不写"镜头平稳推近"，写"镜头晚了半拍才反应过来，往右挪，绕到能看清她脸的位置"。
+- **顺着模型的脾气。** 模型的镜头只回应画面里已经发生的事，所以"慢半拍""追过去"好拍，"镜头比人先动"难拍，后者交给时间点或剪辑。
+- **写镜头情绪时锁住演员。** 否则紧张会跑到演员身上。
+- **动作幅度给上限。** 冲得太猛会被拍成跳切。
+- **把时间写满。** 空着的时间，模型会补上最标准的平稳运镜。
+- **导演名字不进提示词。** 写"王家卫风格"，模型多半只学到色调；要写的是他怎么拍。
 
-## 帮忙测试
+背后的完整思路见 [`imperfect-camera/references/theory.md`](imperfect-camera/references/theory.md)。
 
-最有用的反馈是**同一个场景的基线版和导演版**一起发出来。最方便的是[开一个 Issue](https://github.com/misterwin0553-droid/motivated-imperfection/issues/new?template=test-feedback.yml)，表单都备好了；也可以照 [`FEEDBACK.md`](FEEDBACK.md) 的格式发在 X 评论区或私信我。
+## 反馈
 
-特别想测的：
-1. 姜文（镜头抢先）在你的模型上成不成？
-2. 别人看你的导演版，能认出是哪位导演吗？
-3. 哪位导演最"不像"？
+用出了好片子或者踩了坑，欢迎[开一个 Issue](https://github.com/misterwin0553-droid/imperfect-camera/issues/new?template=feedback.yml)，表单都备好了。最有用的是**同一个场景的普通版和导演版**一起发；也可以照 [`FEEDBACK.md`](FEEDBACK.md) 的格式，在 X 上评论或私信我。
 
 ## 说明
 
-- 测试版，结论都来自小样本，欢迎推翻。
 - 导演卡是对公开作品拍摄风格的分析和概括，不代表导演本人或其团队。
 - 许可：[CC BY 4.0](LICENSE)。可以自由使用、修改、再分享（包括商用），请注明出处并附上本仓库链接。

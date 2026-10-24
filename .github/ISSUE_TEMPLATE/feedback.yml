@@ -1,4 +1,4 @@
-name: 测试反馈
+name: 使用反馈
 description: 用某位导演跑了一条视频？把基线版和导演版一起发上来
 title: "[反馈] 导演：  · 模型："
 labels: ["feedback"]
