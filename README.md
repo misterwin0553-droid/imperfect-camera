@@ -1,15 +1,16 @@
-# 不完美，才真实 · AI 视频镜头与灯光 skill
+# 不完美，才真实 · AI 视频镜头、灯光与表演 skill
 
-AI 视频一眼假，毛病多半不在画质，在镜头和光：太标准了，标准到不像有人在拍。
+AI 视频一眼假，毛病多半不在画质，在镜头、光和表演：太标准了，标准到不像有人在拍、有人在演。
 
 镜头 skill 的思路是用"不完美"指导运镜。真人拍的镜头会慢半拍、会被门框挡住、会忍不住往前凑，这些"毛病"背后都有原因，也正是真实感的来源。你选一位导演，它把这位导演的拍法翻成一条条具体的拍摄动作，写成能直接用的提示词。
 
-这个仓库有两个 skill，拆剧本时一起用：先定这场戏的情绪，再分别决定镜头怎么动、光怎么打。
+这个仓库有三个 skill，拆剧本时一起用：先定这场戏的情绪，再分别决定镜头怎么动、光怎么打、人怎么演。
 
 | skill | 管什么 | 文件夹 |
 |---|---|---|
 | **imperfect-camera** | 镜头怎么动：选一位导演，生成像真人拍的运镜提示词 | `imperfect-camera/` |
 | **scene-lighting** | 光怎么打：按剧情拆出每场戏的灯光卡，写成模型照着执行的提示词 | `scene-lighting/` |
+| **scene-acting** | 人怎么演：按节拍和景别拆出每个镜头的表演卡，情绪写成看得见的动作 | `scene-acting/` |
 
 ## imperfect-camera · 内置 10 位导演
 
@@ -28,11 +29,25 @@ AI 默认的光是"哪儿都照好"的平均光，写"电影感布光""伦勃朗
 
 用法：把剧本给它，说"给这段剧本设计灯光"。
 
+## scene-acting · 剧本表演设计
+
+AI 演员的毛病是演得太满：写"露出期待的表情""表情很难过"，每个情绪都被演成满格的表情包，一个接一个切换。这个 skill 的原则是**写看得见的部位和台词结构，不写情绪和修饰语**：
+
+- 情绪写成身体部位的变化：嘴唇微张、屏住呼吸、咽一下、视线落到地板（实测 3/3 照做，而且克制）
+- "克制""幅度很小"会把情绪变成零，"过一秒才转头"会把动作吞掉，这些写法都换掉
+- 人物总是直视镜头？让门框或对方出现在画面一侧，视线就有了落点（实测从 7–9 成看镜头降到 0）
+- 两人戏的接话写结构：迟接给沉默单独一段，打断把对方的台词写成半句"——"（实测接话间隔 5.3 秒和 0.0 秒）
+- 按景别决定能演到哪一级：双人中景只看得见头和视线，嘴部的戏放进近景
+- 一段只放一个动作：一段里写两个小动作，后一个常被丢掉
+- 附原创短剧《备用钥匙》完整拆解：6 个镜头，按最终规则实测 6/6 合格
+
+用法：把剧本给它，说"给这段剧本拆表演"或"这场戏怎么演"。
+
 ## 安装
 
-**Claude Code**：把 `imperfect-camera` 和 `scene-lighting` 文件夹放进项目的 `.claude/skills/`（只对这个项目生效），或放进 `~/.claude/skills/`（所有项目生效）。
+**Claude Code**：把 `imperfect-camera`、`scene-lighting` 和 `scene-acting` 文件夹放进项目的 `.claude/skills/`（只对这个项目生效），或放进 `~/.claude/skills/`（所有项目生效）。
 
-**Claude 网页版 / App**：下载 [imperfect-camera.zip](https://github.com/misterwin0553-droid/imperfect-camera/releases/latest/download/imperfect-camera.zip) 和 [scene-lighting.zip](https://github.com/misterwin0553-droid/imperfect-camera/releases/latest/download/scene-lighting.zip)，在 设置 → 功能（Capabilities）→ Skills 里分别上传。
+**Claude 网页版 / App**：下载 [imperfect-camera.zip](https://github.com/misterwin0553-droid/imperfect-camera/releases/latest/download/imperfect-camera.zip)、[scene-lighting.zip](https://github.com/misterwin0553-droid/imperfect-camera/releases/latest/download/scene-lighting.zip) 和 [scene-acting.zip](https://github.com/misterwin0553-droid/imperfect-camera/releases/latest/download/scene-acting.zip)，在 设置 → 功能（Capabilities）→ Skills 里分别上传。
 
 ## imperfect-camera 怎么用
 
